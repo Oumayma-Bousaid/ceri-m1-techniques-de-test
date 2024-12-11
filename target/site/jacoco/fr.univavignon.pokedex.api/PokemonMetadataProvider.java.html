@@ -3,29 +3,49 @@
 import java.util.HashMap;
 import java.util.Map;
 
-<span class="fc" id="L6">public class PokemonMetadataProvider implements IPokemonMetadataProvider {</span>
+/**
+ * Concrete implementation of the IPokemonMetadataProvider interface.
+ * Provides metadata for Pokemon based on their index.
+ *
+ * @author fv
+ */
+<span class="fc" id="L12">public class PokemonMetadataProvider implements IPokemonMetadataProvider {</span>
 
+    // Maximum allowed Pokemon index value.
     private static final int MAX_POKEMON_INDEX = 151;
+
+    // Map to store the metadata of Pokemon indexed by their index.
     private static final Map&lt;Integer, PokemonMetadata&gt; pokemonDataMap;
 
+    // Static block to initialize the pokemon data map with some sample Pokemon.
     static {
-<span class="fc" id="L12">        pokemonDataMap = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L13">        pokemonDataMap.put(0, new PokemonMetadata(0, &quot;Bulbizarre&quot;, 126, 126, 90));</span>
-<span class="fc" id="L14">        pokemonDataMap.put(133, new PokemonMetadata(133, &quot;Aquali&quot;, 186, 186, 260));</span>
-<span class="fc" id="L15">    }</span>
+<span class="fc" id="L22">        pokemonDataMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L23">        pokemonDataMap.put(0, new PokemonMetadata(0, &quot;Bulbizarre&quot;, 126, 126, 90));</span>
+<span class="fc" id="L24">        pokemonDataMap.put(133, new PokemonMetadata(133, &quot;Aquali&quot;, 186, 186, 260));</span>
+<span class="fc" id="L25">    }</span>
 
+    /**
+     * Retrieves the metadata for the specified Pokemon index.
+     *
+     * @param index The index of the Pokemon.
+     * @return The metadata of the Pokemon.
+     * @throws PokedexException If the index is out of bounds or metadata is unavailable.
+     */
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
-<span class="fc bfc" id="L19" title="All 4 branches covered.">        if (index &lt; 0 || index &gt; MAX_POKEMON_INDEX) {</span>
-<span class="fc" id="L20">            throw new PokedexException(&quot;Pokemon not found&quot;);</span>
+        // Check if the index is within the valid range
+<span class="fc bfc" id="L37" title="All 4 branches covered.">        if (index &lt; 0 || index &gt; MAX_POKEMON_INDEX) {</span>
+<span class="fc" id="L38">            throw new PokedexException(&quot;Pokemon not found&quot;);</span>
         }
 
-<span class="fc" id="L23">        PokemonMetadata metadata = pokemonDataMap.get(index);</span>
-<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (metadata != null) {</span>
-<span class="fc" id="L25">            return metadata;</span>
+        // Retrieve the metadata from the map
+<span class="fc" id="L42">        PokemonMetadata metadata = pokemonDataMap.get(index);</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        if (metadata != null) {</span>
+<span class="fc" id="L44">            return metadata;</span>
         }
 
-<span class="nc" id="L28">        throw new PokedexException(&quot;Pokemon metadata source is unavailable&quot;);</span>
+        // Throw exception if the metadata is unavailable
+<span class="nc" id="L48">        throw new PokedexException(&quot;Pokemon metadata source is unavailable&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
